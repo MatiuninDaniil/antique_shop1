@@ -1,0 +1,81 @@
+{% extends "dashboard/base.html" %}
+{% block nav_res %}active{% endblock %}
+{% block title %}Reservations — Dashboard{% endblock %}
+
+{% block content %}
+<div class="topbar">
+  <h1>Reservations</h1>
+</div>
+
+<!-- Status filter tabs -->
+<div class="d-flex gap-2 mb-4">
+  <a href="?status=" class="btn btn-sm {% if not status_filter %}btn-gold{% else %}btn-outline-secondary{% endif %}">
+    All
+  </a>
+  <a href="?status=pending" class="btn btn-sm {% if status_filter == 'pending' %}btn-gold{% else %}btn-outline-secondary{% endif %}">
+    Pending
+  </a>
+  <a href="?status=confirmed" class="btn btn-sm {% if status_filter == 'confirmed' %}btn-gold{% else %}btn-outline-secondary{% endif %}">
+    Confirmed
+  </a>
+  <a href="?status=cancelled" class="btn btn-sm {% if status_filter == 'cancelled' %}btn-gold{% else %}btn-outline-secondary{% endif %}">
+    Cancelled
+  </a>
+</div>
+
+<!-- Reservations table -->
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Item</th>
+        <th>Customer</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in reservations %}
+      <tr>
+        <td><span class="code-pill">{{ r.code }}</span></td>
+        <td>{{ r.item_name }}</td>
+        <td>
+          {{ r.user.username }}<br>
+          <small class="text-secondary">{{ r.user.email }}</small>
+        </td>
+        <td>{{ r.created_at|date:"d M Y" }}</td>
+        <td style="color:#c4943a;">€{{ r.item_price }}</td>
+        <td>
+          <span class="badge
+            {% if r.status == 'pending' %}badge-pending
+            {% elif r.status == 'confirmed' %}badge-confirmed
+            {% else %}badge-cancelled{% endif %}">
+            {{ r.get_status_display }}
+          </span>
+        </td>
+        <td>
+          {% if r.status == 'pending' %}
+            <a href="{% url 'dashboard_res_confirm' r.pk %}"
+               class="btn btn-gold btn-sm me-1"
+               onclick="return confirm('Confirm payment?')">✓ Paid</a>
+            <a href="{% url 'dashboard_res_cancel' r.pk %}"
+               class="btn btn-outline-secondary btn-sm"
+               onclick="return confirm('Cancel this reservation?')">✕ Cancel</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- If no reservations -->
+{% if not reservations %}
+  <div class="text-center py-5">
+    <p class="text-secondary">No reservations found.</p>
+  </div>
+{% endif %}
+{% endblock %}

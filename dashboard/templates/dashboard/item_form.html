@@ -1,0 +1,74 @@
+{% extends "dashboard/base.html" %}
+{% block nav_add %}active{% endblock %}
+{% block title %}{% if item.id %}Edit{% else %}Add{% endif %} Item — Dashboard{% endblock %}
+
+{% block content %}
+<div class="topbar">
+  <h1>{% if item.id %}Edit: {{ item.name }}{% else %}Add New Item{% endif %}</h1>
+  <a href="{% url 'dashboard_items' %}" class="btn btn-outline-secondary">← Back</a>
+</div>
+
+<div class="card p-4" style="max-width:800px;">
+  <form method="post">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-12">
+        <label class="form-label">Name *</label>
+        <input type="text" name="name" class="form-control" value="{{ item.name }}" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Category</label>
+        <input type="text" name="category" class="form-control"
+               value="{{ item.category }}" list="cat-list">
+        <datalist id="cat-list">
+          {% for cat in categories %}<option value="{{ cat }}">{% endfor %}
+        </datalist>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Era</label>
+        <input type="text" name="era" class="form-control"
+               value="{{ item.era }}" list="era-list">
+        <datalist id="era-list">
+          {% for e in eras %}<option value="{{ e }}">{% endfor %}
+        </datalist>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Country</label>
+        <input type="text" name="country" class="form-control" value="{{ item.country }}">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Year</label>
+        <input type="number" name="year" class="form-control" value="{{ item.year }}">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Condition</label>
+        <select name="condition" class="form-select">
+          {% for c in "Excellent,Good,Fair,Requires restoration"|split:"," %}
+            <option {% if item.condition == c %}selected{% endif %}>{{ c }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Buy price (€)</label>
+        <input type="number" step="0.01" name="buy_price" class="form-control" value="{{ item.buy_price }}">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Sell price (€)</label>
+        <input type="number" step="0.01" name="sell_price" class="form-control" value="{{ item.sell_price }}">
+      </div>
+      <div class="col-12">
+        <label class="form-label">Provenance</label>
+        <input type="text" name="provenance" class="form-control" value="{{ item.provenance }}">
+      </div>
+      <div class="col-12">
+        <label class="form-label">Description (shown on website)</label>
+        <textarea name="description" class="form-control" rows="4">{{ item.description }}</textarea>
+      </div>
+    </div>
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-gold px-4">Save Item</button>
+      <a href="{% url 'dashboard_items' %}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "catalog/base.html" %}
+{% block title %}{{ item.name }} — Faust's Attic{% endblock %}
+
+{% block content %}
+<a href="{% url 'catalog' %}" class="text-gold text-decoration-none">← Назад в каталог</a>
+
+<div class="row mt-4 g-5">
+  <!-- Фото -->
+  <div class="col-md-5">
+    <div style="height:360px; background:#2e1a0e; display:flex; align-items:center;
+                justify-content:center; font-size:6rem; border:1px solid #c4943a33; border-radius:8px;">
+      {% if item.category == "Мебель" %}🪑
+      {% elif item.category == "Ювелирные украшения" %}💎
+      {% elif item.category == "Живопись" %}🖼️
+      {% elif item.category == "Часы" %}🕰️
+      {% elif item.category == "Посуда и фарфор" %}🍶
+      {% else %}🏺{% endif %}
+    </div>
+  </div>
+
+  <!-- Информация -->
+  <div class="col-md-7">
+    <span class="badge badge-category mb-3">{{ item.category }}</span>
+    <h1 style="color:#f5ede0; font-size:1.8rem;">{{ item.name }}</h1>
+    <p class="price-tag mb-3">€{{ item.sell_price }}</p>
+
+    <table class="table table-sm" style="color:#f5ede0;">
+      <tbody>
+        <tr><td class="text-secondary">Эпоха</td><td>{{ item.era }}</td></tr>
+        <tr><td class="text-secondary">Страна</td><td>{{ item.country }}</td></tr>
+        <tr><td class="text-secondary">Год</td><td>{{ item.year }}</td></tr>
+        <tr><td class="text-secondary">Состояние</td><td>{{ item.condition }}</td></tr>
+        {% if item.provenance %}
+        <tr><td class="text-secondary">Провенанс</td><td>{{ item.provenance }}</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+
+    {% if item.description %}
+    <p style="color:#c8b89a; line-height:1.8;">{{ item.description }}</p>
+    {% endif %}
+
+    <div class="mt-4">
+      {% if item.is_sold %}
+        <span class="badge bg-secondary fs-6">Продано</span>
+      {% elif item.is_reserved %}
+        <span class="status-reserved">⏳ Этот предмет уже забронирован</span>
+      {% else %}
+       <a href="{% url 'cart_add' item.id %}" class="btn btn-gold btn-lg">Add to Cart</a>
+        <p class="text-secondary mt-2" style="font-size:.85rem;">
+          Бронирование бесплатно. Оплата наличными в магазине.
+        </p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

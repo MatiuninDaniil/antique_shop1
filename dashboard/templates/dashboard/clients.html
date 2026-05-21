@@ -1,0 +1,22 @@
+{% extends "dashboard/base.html" %}
+{% block nav_clients %}active{% endblock %}
+{% block title %}Clients — Dashboard{% endblock %}
+
+{% block content %}
+<div class="topbar"><h1>Clients</h1></div>
+<div class="table-responsive">
+  <table class="table">
+    <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Interests</th></tr></thead>
+    <tbody>
+      {% for c in clients %}
+      <tr>
+        <td>{{ c.name }}</td>
+        <td>{{ c.phone }}</td>
+        <td>{{ c.email }}</td>
+        <td><small class="text-secondary">{{ c.interests|join:", " }}</small></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

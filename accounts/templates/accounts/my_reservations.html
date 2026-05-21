@@ -1,0 +1,36 @@
+{% extends "catalog/base.html" %}
+{% block title %}My Bookings — Faust's Attic{% endblock %}
+{% block content %}
+<h1 class="text-gold mb-4">My Bookings</h1>
+{% if reservations %}
+  {% for r in reservations %}
+  <div class="card p-3 mb-3">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h5 class="mb-1">{{ r.item_name }}</h5>
+        <p class="text-secondary mb-1" style="font-size:.85rem;">{{ r.created_at|date:"d M Y" }}</p>
+        {% if r.status == 'confirmed' %}
+          <span class="badge" style="background: #2d6a2d;">{{ r.get_status_display }}</span>
+        {% elif r.status == 'cancelled' %}
+          <span class="badge" style="background: #7c3122;">{{ r.get_status_display }}</span>
+        {% else %}
+          <span class="badge" style="background: #4a3a1e;">{{ r.get_status_display }}</span>
+        {% endif %}
+      </div>
+      <div class="text-end">
+        <p class="price-tag mb-1">€{{ r.item_price }}</p>
+        <p style="font-size:1.4rem; font-weight:700; color:#e8c87a; letter-spacing:.15em;">
+          {{ r.code }}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+  <div class="text-center py-5">
+    <p style="font-size:3rem;">📋</p>
+    <p class="text-secondary">No bookings yet.</p>
+    <a href="{% url 'catalog' %}" class="btn btn-gold">Browse Catalogue</a>
+  </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "dashboard/base.html" %}
+{% block nav_items %}active{% endblock %}
+{% block title %}Items — Dashboard{% endblock %}
+
+{% block content %}
+<div class="topbar">
+  <h1>Items</h1>
+  <a href="{% url 'dashboard_item_add' %}" class="btn btn-gold">+ Add Item</a>
+</div>
+
+<!-- Filters -->
+<form method="get" class="row g-2 mb-4">
+  <div class="col-md-4">
+    <input type="text" name="q" class="form-control" placeholder="Search by name…" value="{{ search }}">
+  </div>
+  <div class="col-md-3">
+    <select name="category" class="form-select">
+      <option value="">All categories</option>
+      {% for cat in categories %}
+        <option value="{{ cat }}" {% if category == cat %}selected{% endif %}>{{ cat }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2">
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" name="show_sold" id="show_sold"
+             {% if show_sold %}checked{% endif %} value="1">
+      <label class="form-check-label" for="show_sold" style="color:#c8b89a;">Show sold</label>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-gold w-100">Filter</button>
+  </div>
+  <div class="col-md-1">
+    <a href="{% url 'dashboard_items' %}" class="btn btn-outline-secondary w-100">✕</a>
+  </div>
+</form>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr><th>Name</th><th>Category</th><th>Year</th><th>Price</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>
+          <a href="{% url 'item_detail' item.id %}" target="_blank"
+             style="color:#f5ede0; text-decoration:none;">{{ item.name }}</a>
+        </td>
+        <td><small class="text-secondary">{{ item.category }}</small></td>
+        <td>{{ item.year }}</td>
+        <td style="color:#c4943a;">€{{ item.sell_price }}</td>
+        <td>
+          {% if item.is_sold %}
+            <span class="badge badge-cancelled">Sold</span>
+          {% elif item.is_reserved %}
+            <span class="badge badge-pending">Reserved</span>
+          {% else %}
+            <span class="badge badge-confirmed">Available</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="{% url 'dashboard_item_edit' item.id %}" class="btn btn-outline-secondary btn-sm me-1">Edit</a>
+          {% if not item.is_sold %}
+            <a href="{% url 'dashboard_item_sold' item.id %}"
+               class="btn btn-gold btn-sm me-1"
+               onclick="return confirm('Mark as sold?')">Sold</a>
+          {% endif %}
+          <a href="{% url 'dashboard_item_delete' item.id %}"
+             class="btn btn-outline-danger btn-sm">Del</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

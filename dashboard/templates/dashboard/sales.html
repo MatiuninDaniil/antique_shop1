@@ -1,0 +1,23 @@
+{% extends "dashboard/base.html" %}
+{% block nav_sales %}active{% endblock %}
+{% block title %}Sales — Dashboard{% endblock %}
+
+{% block content %}
+<div class="topbar"><h1>Sales History</h1></div>
+<div class="table-responsive">
+  <table class="table">
+    <thead><tr><th>Sale ID</th><th>Item</th><th>Date</th><th>Price</th><th>Notes</th></tr></thead>
+    <tbody>
+      {% for s in sales %}
+      <tr>
+        <td><small class="text-secondary">{{ s.id }}</small></td>
+        <td>{{ s.item.name|default:s.item_id }}</td>
+        <td>{{ s.date }}</td>
+        <td style="color:#c4943a;">€{{ s.final_price }}</td>
+        <td><small class="text-secondary">{{ s.notes }}</small></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

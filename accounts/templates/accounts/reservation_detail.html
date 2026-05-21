@@ -1,0 +1,33 @@
+{% extends "catalog/base.html" %}
+{% block title %}Booking Confirmed — Faust's Attic{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 text-center">
+    <div class="card p-5">
+      <p style="font-size:3rem;">✅</p>
+      <h2 class="text-gold mb-2">Booking Confirmed!</h2>
+      <p class="text-secondary mb-4">Show this code at the shop to claim your item.</p>
+
+      <div style="background:#0f0904; border:2px solid #c4943a;
+                  border-radius:8px; padding:2rem; margin:1.5rem 0;">
+        <p class="text-secondary mb-1" style="font-size:.8rem; letter-spacing:.2em;">BOOKING CODE</p>
+        <p style="font-size:3rem; font-weight:700; color:#e8c87a; letter-spacing:.2em; margin:0;">
+          {{ r.code }}
+        </p>
+      </div>
+
+      <table class="table table-sm text-start mt-3" style="color:#f5ede0;">
+        <tr><td class="text-secondary">Item</td><td>{{ r.item_name }}</td></tr>
+        <tr><td class="text-secondary">Price</td><td>€{{ r.item_price }}</td></tr>
+        <tr><td class="text-secondary">Status</td><td>{{ r.get_status_display }}</td></tr>
+        <tr><td class="text-secondary">Reserved on</td><td>{{ r.created_at|date:"d M Y" }}</td></tr>
+      </table>
+
+      <p class="text-secondary mt-3" style="font-size:.85rem;">
+        Come to the shop, quote your code, pay in cash and take your treasure home.
+      </p>
+      <a href="{% url 'my_reservations' %}" class="btn btn-gold mt-2">My Bookings</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

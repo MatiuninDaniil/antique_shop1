@@ -1,0 +1,82 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Dashboard — Faust's Attic{% endblock %}
+
+{% block content %}
+<div class="topbar">
+  <h1>Overview</h1>
+  <a href="{% url 'dashboard_item_add' %}" class="btn btn-gold">+ Add Item</a>
+</div>
+
+<!-- Stats -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="stat-num">{{ counts.total }}</div>
+      <div class="stat-label">Total Items</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="stat-num" style="color:#7aba7a;">{{ counts.available }}</div>
+      <div class="stat-label">Available</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="stat-num" style="color:#e8c87a;">{{ counts.reserved }}</div>
+      <div class="stat-label">Reserved</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="stat-num" style="color:#7a6248;">{{ counts.sold }}</div>
+      <div class="stat-label">Sold</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pending reservations -->
+<h2 class="mb-3" style="font-size:1.1rem; color:#7a6248; letter-spacing:.05em;">
+  PENDING RESERVATIONS — ACTION REQUIRED
+</h2>
+{% if pending_reservations %}
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Item</th>
+        <th>Customer</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in pending_reservations %}
+      <tr>
+        <td><span class="code-pill">{{ r.code }}</span></td>
+        <td>{{ r.item_name }}</td>
+        <td>
+          {{ r.user.username }}<br>
+          <small class="text-secondary">{{ r.user.email }}</small>
+        </td>
+        <td>{{ r.created_at|date:"d M Y" }}</td>
+        <td style="color:#c4943a;">€{{ r.item_price }}</td>
+        <td>
+          <a href="{% url 'dashboard_res_confirm' r.pk %}"
+             class="btn btn-gold btn-sm me-1"
+             onclick="return confirm('Mark as paid and sold?')">✓ Confirm</a>
+          <a href="{% url 'dashboard_res_cancel' r.pk %}"
+             class="btn btn-outline-secondary btn-sm"
+             onclick="return confirm('Cancel this reservation?')">✕ Cancel</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+  <p class="text-secondary">No pending reservations. 🎉</p>
+{% endif %}
+{% endblock %}

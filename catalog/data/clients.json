@@ -1,0 +1,16 @@
+[
+  {
+    "id": "client_001",
+    "name": "Андреас Пападопулос",
+    "phone": "+357 99 123456",
+    "email": "andreas@example.com",
+    "interests": ["Живопись", "Мебель"]
+  },
+  {
+    "id": "client_002",
+    "name": "Maria Schmidt",
+    "phone": "+49 170 9876543",
+    "email": "maria.schmidt@example.de",
+    "interests": ["Ювелирные украшения", "Часы"]
+  }
+]

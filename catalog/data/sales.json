@@ -1,0 +1,10 @@
+[
+  {
+    "id": "sale_001",
+    "item_id": "item_004",
+    "client_id": "client_001",
+    "date": "2024-11-15",
+    "final_price": 100.00,
+    "notes": "Скидка по договорённости"
+  }
+]
