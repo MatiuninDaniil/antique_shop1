@@ -65,3 +65,29 @@ def get_client(client_id):
 # ── ПРОДАЖИ ───────────────────────────────────────────
 def get_sales():
     return _load("sales.json")
+
+import shutil
+from pathlib import Path
+from django.conf import settings
+
+def save_item_image(item_id, file):
+    """Сохраняет загруженный файл и возвращает относительный путь."""
+    upload_dir = Path(settings.MEDIA_ROOT) / 'items'
+    upload_dir.mkdir(parents=True, exist_ok=True)
+
+    suffix = Path(file.name).suffix.lower()
+    filename = f"{item_id}{suffix}"
+    filepath = upload_dir / filename
+
+    with open(filepath, 'wb+') as dest:
+        for chunk in file.chunks():
+            dest.write(chunk)
+
+    return f"items/{filename}"
+
+def delete_item_image(image_path):
+    """Удаляет файл фото если существует."""
+    if image_path:
+        full = Path(settings.MEDIA_ROOT) / image_path
+        if full.exists():
+            full.unlink()

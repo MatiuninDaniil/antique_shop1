@@ -61,8 +61,8 @@ def item_list(request):
 
 
 @staff_member_required(login_url='/accounts/login/')
+@staff_member_required(login_url='/accounts/login/')
 def item_form(request, item_id=None):
-    """Add or edit an item."""
     item = get_item(item_id) if item_id else {}
 
     if request.method == 'POST':
@@ -83,6 +83,19 @@ def item_form(request, item_id=None):
             'is_sold':     item.get('is_sold', False),
             'is_reserved': item.get('is_reserved', False),
         }
+
+        # Обработка загруженного фото
+        photo = request.FILES.get('image')
+        if photo:
+            from catalog.data_service import save_item_image
+            updated['image'] = save_item_image(updated['id'], photo)
+
+        # Удалить фото если нажали «Remove photo»
+        if data.get('remove_image') and updated['image']:
+            from catalog.data_service import delete_item_image
+            delete_item_image(updated['image'])
+            updated['image'] = ''
+
         if not updated['name']:
             messages.error(request, 'Name is required.')
             return render(request, 'dashboard/item_form.html', {'item': updated})
@@ -96,7 +109,6 @@ def item_form(request, item_id=None):
         'categories': get_all_categories(),
         'eras':       get_all_eras(),
     })
-
 
 @staff_member_required(login_url='/accounts/login/')
 def item_mark_sold(request, item_id):

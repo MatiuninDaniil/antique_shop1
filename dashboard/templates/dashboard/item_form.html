@@ -9,7 +9,7 @@
 </div>
 
 <div class="card p-4" style="max-width:800px;">
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row g-3">
       <div class="col-12">
@@ -43,9 +43,10 @@
       <div class="col-md-6">
         <label class="form-label">Condition</label>
         <select name="condition" class="form-select">
-          {% for c in "Excellent,Good,Fair,Requires restoration"|split:"," %}
-            <option {% if item.condition == c %}selected{% endif %}>{{ c }}</option>
-          {% endfor %}
+          <option {% if item.condition == "Excellent" %}selected{% endif %}>Excellent</option>
+          <option {% if item.condition == "Good" %}selected{% endif %}>Good</option>
+          <option {% if item.condition == "Fair" %}selected{% endif %}>Fair</option>
+          <option {% if item.condition == "Requires restoration" %}selected{% endif %}>Requires restoration</option>
         </select>
       </div>
       <div class="col-md-3">
@@ -64,6 +65,30 @@
         <label class="form-label">Description (shown on website)</label>
         <textarea name="description" class="form-control" rows="4">{{ item.description }}</textarea>
       </div>
+      
+      <!-- Photo upload block -->
+      <div class="col-12">
+        <label class="form-label">Photo</label>
+        
+        {% if item.image %}
+        <div class="mb-2">
+          <img src="/media/{{ item.image }}" alt="Current photo"
+               style="height:140px; object-fit:cover; border:1px solid #c4943a33; border-radius:6px;">
+          <div class="form-check mt-2">
+            <input type="checkbox" name="remove_image" class="form-check-input" id="remove_image">
+            <label class="form-check-label text-secondary" for="remove_image" style="font-size:.85rem;">
+              Remove current photo
+            </label>
+          </div>
+        </div>
+        {% endif %}
+        
+        <input type="file" name="image" accept="image/*" class="form-control">
+        <div class="form-text" style="color:#7a6248;">
+          JPG, PNG, WEBP — max ~5 MB. Leave empty to keep current photo.
+        </div>
+      </div>
+      
     </div>
     <div class="mt-4 d-flex gap-2">
       <button type="submit" class="btn btn-gold px-4">Save Item</button>

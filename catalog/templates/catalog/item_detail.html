@@ -7,14 +7,22 @@
 <div class="row mt-4 g-5">
   <!-- Фото -->
   <div class="col-md-5">
-    <div style="height:360px; background:#2e1a0e; display:flex; align-items:center;
-                justify-content:center; font-size:6rem; border:1px solid #c4943a33; border-radius:8px;">
-      {% if item.category == "Мебель" %}🪑
-      {% elif item.category == "Ювелирные украшения" %}💎
-      {% elif item.category == "Живопись" %}🖼️
-      {% elif item.category == "Часы" %}🕰️
-      {% elif item.category == "Посуда и фарфор" %}🍶
-      {% else %}🏺{% endif %}
+    <div style="background:#2e1a0e; border:1px solid #c4943a33;
+                border-radius:8px; overflow:hidden; min-height:360px;
+                display:flex; align-items:center; justify-content:center;">
+      {% if item.image %}
+        <img src="/media/{{ item.image }}" alt="{{ item.name }}"
+             style="width:100%; max-height:480px; object-fit:cover;">
+      {% else %}
+        <span style="font-size:6rem;">
+          {% if item.category == "Мебель" %}🪑
+          {% elif item.category == "Ювелирные украшения" %}💎
+          {% elif item.category == "Живопись" %}🖼️
+          {% elif item.category == "Часы" %}🕰️
+          {% elif item.category == "Посуда и фарфор" %}🍶
+          {% else %}🏺{% endif %}
+        </span>
+      {% endif %}
     </div>
   </div>
 

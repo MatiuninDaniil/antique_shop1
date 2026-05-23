@@ -26,3 +26,6 @@ def item_detail(request, item_id):
 
 def contacts(request):
     return render(request, "catalog/contacts.html")
+
+def home(request):
+    return render(request, 'catalog/index.html')

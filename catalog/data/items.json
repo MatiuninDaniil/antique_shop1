@@ -44,7 +44,7 @@
     "provenance": "Частная коллекция, Лимассол",
     "description": "Маслом на холсте, 60×45 см. Подпись художника в правом нижнем углу. Рама — оригинальная, позолоченная.",
     "image": "",
-    "is_sold": false,
+    "is_sold": true,
     "is_reserved": false
   },
   {
@@ -94,5 +94,37 @@
     "image": "",
     "is_sold": false,
     "is_reserved": true
+  },
+  {
+    "id": "item_5QYEJw",
+    "name": "Vase",
+    "category": "Предметы быта",
+    "era": "Викторианская",
+    "country": "China",
+    "condition": "Excellent",
+    "buy_price": 20.0,
+    "sell_price": 45.0,
+    "year": 1399,
+    "provenance": "",
+    "description": "cool china vase, you should buy it",
+    "image": "items/item_5QYEJw.jpg",
+    "is_sold": false,
+    "is_reserved": false
+  },
+  {
+    "id": "item_jlSY6S",
+    "name": "Hello kity watch",
+    "category": "Часы",
+    "era": "Арт-нуво",
+    "country": "USA",
+    "condition": "Excellent",
+    "buy_price": 23.0,
+    "sell_price": 46.0,
+    "year": 1999,
+    "provenance": "USA",
+    "description": "Nice watch, for the strong and indepedent only",
+    "image": "items/item_jlSY6S.jpg",
+    "is_sold": true,
+    "is_reserved": false
   }
 ]

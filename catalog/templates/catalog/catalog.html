@@ -44,14 +44,23 @@
     <a href="{% url 'item_detail' item.id %}" class="text-decoration-none">
       <div class="card h-100 p-3">
         <!-- Заглушка фото -->
-        <div style="height:180px; background:#1c1007; display:flex; align-items:center;
-                    justify-content:center; font-size:3rem; border-radius:4px; margin-bottom:1rem;">
-          {% if item.category == "Мебель" %}🪑
-          {% elif item.category == "Ювелирные украшения" %}💎
-          {% elif item.category == "Живопись" %}🖼️
-          {% elif item.category == "Часы" %}🕰️
-          {% elif item.category == "Посуда и фарфор" %}🍶
-          {% else %}🏺{% endif %}
+        <!-- Фото или заглушка -->
+        <div style="height:180px; background:#1c1007; overflow:hidden;
+                    border-radius:4px; margin-bottom:1rem; position:relative;">
+          {% if item.image %}
+            <img src="/media/{{ item.image }}" alt="{{ item.name }}"
+                 style="width:100%; height:100%; object-fit:cover; opacity:.9;">
+          {% else %}
+            <div style="height:100%; display:flex; align-items:center;
+                        justify-content:center; font-size:3rem;">
+              {% if item.category == "Мебель" %}🪑
+              {% elif item.category == "Ювелирные украшения" %}💎
+              {% elif item.category == "Живопись" %}🖼️
+              {% elif item.category == "Часы" %}🕰️
+              {% elif item.category == "Посуда и фарфор" %}🍶
+              {% else %}🏺{% endif %}
+            </div>
+          {% endif %}
         </div>
 
         <span class="badge badge-category mb-2">{{ item.category }}</span>
