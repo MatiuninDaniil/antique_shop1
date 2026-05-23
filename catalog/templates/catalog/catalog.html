@@ -1,15 +1,15 @@
 {% extends "catalog/base.html" %}
-{% block title %}Каталог — Faust's Attic{% endblock %}
+{% block title %}Catalog — Faust's Attic{% endblock %}
 
 {% block content %}
-<h1 class="mb-1" style="color:#c4943a;">Каталог</h1>
-<p class="text-secondary mb-4">{{ items|length }} предмет{{ items|length|pluralize:",,ов" }} в наличии</p>
+<h1 class="mb-1" style="color:#c4943a;">Catalog</h1>
+<p class="text-secondary mb-4">{{ items|length }} item{{ items|length|pluralize:",s" }} in stock</p>
 
-<!-- Фильтры -->
+<!-- Filters -->
 <form method="get" class="row g-2 mb-4">
   <div class="col-md-3">
     <select name="category" class="form-select">
-      <option value="">Все категории</option>
+      <option value="">All categories</option>
       {% for cat in categories %}
         <option value="{{ cat }}" {% if selected.category == cat %}selected{% endif %}>{{ cat }}</option>
       {% endfor %}
@@ -17,7 +17,7 @@
   </div>
   <div class="col-md-3">
     <select name="era" class="form-select">
-      <option value="">Все эпохи</option>
+      <option value="">All eras</option>
       {% for e in eras %}
         <option value="{{ e }}" {% if selected.era == e %}selected{% endif %}>{{ e }}</option>
       {% endfor %}
@@ -25,26 +25,25 @@
   </div>
   <div class="col-md-3">
     <input type="number" name="max_price" class="form-control"
-           placeholder="Макс. цена, €"
+           placeholder="Max price, €"
            value="{{ selected.max_price }}">
   </div>
   <div class="col-md-2">
-    <button type="submit" class="btn btn-gold w-100">Найти</button>
+    <button type="submit" class="btn btn-gold w-100">Search</button>
   </div>
   <div class="col-md-1">
     <a href="{% url 'catalog' %}" class="btn btn-outline-secondary w-100">✕</a>
   </div>
 </form>
 
-<!-- Товары -->
+<!-- Items -->
 {% if items %}
 <div class="row row-cols-1 row-cols-md-3 g-4">
   {% for item in items %}
   <div class="col">
     <a href="{% url 'item_detail' item.id %}" class="text-decoration-none">
       <div class="card h-100 p-3">
-        <!-- Заглушка фото -->
-        <!-- Фото или заглушка -->
+        <!-- Photo placeholder -->
         <div style="height:180px; background:#1c1007; overflow:hidden;
                     border-radius:4px; margin-bottom:1rem; position:relative;">
           {% if item.image %}
@@ -53,11 +52,11 @@
           {% else %}
             <div style="height:100%; display:flex; align-items:center;
                         justify-content:center; font-size:3rem;">
-              {% if item.category == "Мебель" %}🪑
-              {% elif item.category == "Ювелирные украшения" %}💎
-              {% elif item.category == "Живопись" %}🖼️
-              {% elif item.category == "Часы" %}🕰️
-              {% elif item.category == "Посуда и фарфор" %}🍶
+              {% if item.category == "Furniture" %}🪑
+              {% elif item.category == "Jewelry" %}💎
+              {% elif item.category == "Painting" %}🖼️
+              {% elif item.category == "Watches" %}🕰️
+              {% elif item.category == "Tableware & Porcelain" %}🍶
               {% else %}🏺{% endif %}
             </div>
           {% endif %}
@@ -71,7 +70,7 @@
         <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
           <span class="price-tag">€{{ item.sell_price }}</span>
           {% if item.is_reserved %}
-            <span class="status-reserved" style="font-size:.8rem;">⏳ Забронировано</span>
+            <span class="status-reserved" style="font-size:.8rem;">⏳ Reserved</span>
           {% endif %}
         </div>
       </div>
@@ -82,8 +81,8 @@
 {% else %}
 <div class="text-center py-5">
   <p style="font-size:3rem;">🔍</p>
-  <p class="text-secondary">По вашему запросу ничего не найдено.</p>
-  <a href="{% url 'catalog' %}" class="btn btn-gold">Сбросить фильтры</a>
+  <p class="text-secondary">No items found matching your search.</p>
+  <a href="{% url 'catalog' %}" class="btn btn-gold">Clear filters</a>
 </div>
 {% endif %}
 {% endblock %}
