@@ -4,22 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Faust's Attic — Antique & Vintage Treasures, Larnaca Cyprus</title>
+<title>Faust's Attic — Antique &amp; Vintage, Larnaca Cyprus</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel+Decorative:wght@400;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink:     #0f0904;
-    --paper:   #f5ede0;
-    --gold:    #c4943a;
-    --gold2:   #e8c87a;
-    --rust:    #7c3122;
-    --dark:    #1c1007;
-    --mid:     #2e1a0e;
-    --muted:   #7a6248;
-    --cream:   #fdf6ec;
+    --ink:   #0f0904;
+    --paper: #f5ede0;
+    --gold:  #c4943a;
+    --gold2: #e8c87a;
+    --rust:  #7c3122;
+    --dark:  #1c1007;
+    --mid:   #2e1a0e;
+    --muted: #7a6248;
   }
 
   html { scroll-behavior: smooth; }
@@ -33,7 +32,7 @@
     overflow-x: hidden;
   }
 
-  /* ── NOISE TEXTURE OVERLAY ── */
+  /* NOISE */
   body::before {
     content: '';
     position: fixed;
@@ -45,44 +44,59 @@
   }
 
   /* ── NAV ── */
-  nav {
+  .home-nav {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
+    z-index: 200;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 4rem;
-    background: linear-gradient(to bottom, rgba(15,9,4,0.97) 0%, rgba(15,9,4,0) 100%);
-    transition: background 0.3s;
+    padding: 1.25rem 3.5rem;
+    background: linear-gradient(to bottom, rgba(10,6,2,0.97) 0%, transparent 100%);
+    transition: background 0.35s, border-color 0.35s;
+    border-bottom: 1px solid transparent;
   }
-  nav.scrolled {
-    background: rgba(15,9,4,0.97);
-    border-bottom: 1px solid rgba(196,148,58,0.2);
+  .home-nav.scrolled {
+    background: rgba(10,6,2,0.97);
+    border-bottom-color: rgba(196,148,58,0.18);
   }
   .nav-logo {
     font-family: 'Cinzel Decorative', serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     letter-spacing: 0.06em;
     color: var(--gold);
     text-decoration: none;
+    transition: color 0.2s;
   }
+  .nav-logo:hover { color: var(--gold2); }
+
   .nav-links {
     display: flex;
-    gap: 2.5rem;
+    align-items: center;
+    gap: 0;
     list-style: none;
   }
-  .nav-links a {
+  .nav-links li a {
     font-family: 'EB Garamond', serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--paper);
+    color: rgba(245,237,224,0.65);
     text-decoration: none;
-    opacity: 0.8;
-    transition: color 0.2s, opacity 0.2s;
+    padding: 0.35rem 1rem;
+    transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--gold2); opacity: 1; }
+  .nav-links li a:hover { color: var(--gold2); }
+  .nav-links .nav-sep { color: rgba(196,148,58,0.2); font-size: 0.65rem; }
+  .nav-pill-link a {
+    background: var(--gold) !important;
+    color: var(--dark) !important;
+    opacity: 1 !important;
+    padding: 0.3rem 1.1rem !important;
+    transition: background 0.2s !important;
+  }
+  .nav-pill-link a:hover { background: var(--gold2) !important; }
+  .nav-user-link a { font-style: italic; color: var(--muted) !important; }
 
   /* ── HERO ── */
   .hero {
@@ -93,129 +107,117 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 6rem 2rem 4rem;
+    padding: 6rem 2rem 5rem;
     overflow: hidden;
   }
   .hero-bg {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124,49,34,0.18) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(196,148,58,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(196,148,58,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 55% at 50% 42%, rgba(124,49,34,0.2) 0%, transparent 68%),
+      radial-gradient(ellipse 45% 45% at 82% 18%, rgba(196,148,58,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 40% at 18% 82%, rgba(196,148,58,0.05) 0%, transparent 60%),
       var(--dark);
     z-index: -1;
   }
-  .hero-ornament {
-    font-size: 1.4rem;
-    letter-spacing: 0.5em;
+  .hero-location {
+    font-size: 0.72rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
     color: var(--gold);
-    opacity: 0.6;
-    margin-bottom: 1.5rem;
-    animation: fadeSlide 1s ease both;
+    opacity: 0.55;
+    margin-bottom: 1.75rem;
+    animation: fadeSlide 0.9s ease both;
   }
   .hero h1 {
     font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(3rem, 8vw, 7rem);
-    line-height: 1.05;
-    letter-spacing: 0.04em;
+    font-size: clamp(3.2rem, 9vw, 7.5rem);
+    line-height: 1.0;
+    letter-spacing: 0.03em;
     color: var(--paper);
-    animation: fadeSlide 1s 0.15s ease both;
+    animation: fadeSlide 0.9s 0.12s ease both;
   }
   .hero h1 span { color: var(--gold); }
   .hero-sub {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-size: clamp(1rem, 2vw, 1.4rem);
     color: var(--gold2);
-    margin: 1.5rem 0 2.5rem;
-    animation: fadeSlide 1s 0.3s ease both;
+    margin: 1.5rem 0 1rem;
+    animation: fadeSlide 0.9s 0.24s ease both;
   }
   .hero-tagline {
-    max-width: 540px;
-    font-size: 1.05rem;
-    color: rgba(245,237,224,0.7);
-    line-height: 1.9;
+    max-width: 500px;
+    font-size: 1rem;
+    color: rgba(245,237,224,0.55);
+    line-height: 1.95;
     margin-bottom: 3rem;
-    animation: fadeSlide 1s 0.45s ease both;
+    animation: fadeSlide 0.9s 0.36s ease both;
+    font-style: italic;
   }
   .hero-cta {
     display: flex;
-    gap: 1.25rem;
+    gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
-    animation: fadeSlide 1s 0.6s ease both;
+    animation: fadeSlide 0.9s 0.5s ease both;
   }
   .btn {
     display: inline-block;
-    padding: 0.85rem 2.5rem;
+    padding: 0.8rem 2.25rem;
     font-family: 'EB Garamond', serif;
-    font-size: 1rem;
-    letter-spacing: 0.1em;
+    font-size: 0.88rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
-    border-radius: 0;
-    transition: all 0.25s;
+    transition: all 0.22s;
     cursor: pointer;
     border: none;
   }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--dark);
-    border: 1px solid var(--gold);
-  }
-  .btn-primary:hover { background: var(--gold2); border-color: var(--gold2); }
-  .btn-ghost {
-    background: transparent;
-    color: var(--paper);
-    border: 1px solid rgba(245,237,224,0.35);
-  }
+  .btn-primary { background: var(--gold); color: var(--dark); border: 1px solid var(--gold); }
+  .btn-primary:hover { background: var(--gold2); border-color: var(--gold2); color: var(--dark); }
+  .btn-ghost { background: transparent; color: var(--paper); border: 1px solid rgba(245,237,224,0.28); }
   .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
   .hero-scroll {
     position: absolute;
-    bottom: 2.5rem;
+    bottom: 2.25rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    animation: fadeSlide 1.2s 0.9s ease both;
+    gap: 0.4rem;
+    animation: fadeSlide 1s 0.85s ease both;
   }
   .hero-scroll span {
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--muted);
   }
   .scroll-line {
-    width: 1px;
-    height: 50px;
+    width: 1px; height: 44px;
     background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
+    animation: scrollPulse 2.2s ease-in-out infinite;
   }
 
   /* ── DIVIDER ── */
   .divider {
     text-align: center;
-    padding: 1rem 0;
+    padding: 0.75rem 0;
     color: var(--gold);
-    opacity: 0.5;
-    font-size: 1.5rem;
-    letter-spacing: 0.5em;
+    opacity: 0.35;
+    font-size: 1.1rem;
+    letter-spacing: 0.6em;
   }
 
-  /* ── SECTION BASE ── */
+  /* ── SECTIONS ── */
   section { position: relative; z-index: 1; }
-  .section-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 6rem 2rem;
-  }
+  .section-inner { max-width: 1080px; margin: 0 auto; padding: 6rem 2rem; }
   .section-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.3em;
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 1rem;
@@ -223,16 +225,13 @@
   }
   .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-size: clamp(1.9rem, 4vw, 3rem);
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 1.5rem;
     color: var(--paper);
   }
-  .section-title em {
-    font-style: italic;
-    color: var(--gold2);
-  }
+  .section-title em { font-style: italic; color: var(--gold2); }
 
   /* ── ABOUT ── */
   .about { background: var(--mid); }
@@ -243,153 +242,226 @@
     align-items: center;
   }
   .about-text p {
-    color: rgba(245,237,224,0.75);
+    color: rgba(245,237,224,0.72);
     margin-bottom: 1.25rem;
     font-size: 1.05rem;
   }
-  .about-highlight {
+  .about-pull {
     margin: 2.5rem 0;
     padding: 1.5rem 2rem;
-    border-left: 3px solid var(--gold);
-    background: rgba(196,148,58,0.05);
+    border-left: 2px solid var(--gold);
+    background: rgba(196,148,58,0.04);
   }
-  .about-highlight p {
+  .about-pull p {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1.25rem;
-    color: var(--gold2) !important;
-    line-height: 1.7;
-    margin: 0 !important;
+    font-size: 1.15rem;
+    color: var(--gold2);
+    line-height: 1.75;
+    margin: 0;
   }
+
+  /* About visual — editorial frame */
   .about-visual {
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .about-frame {
-    width: 320px;
-    height: 420px;
-    border: 1px solid rgba(196,148,58,0.3);
+    width: 300px;
+    height: 400px;
+    border: 1px solid rgba(196,148,58,0.25);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(ellipse at center, rgba(124,49,34,0.2) 0%, rgba(28,16,7,0.8) 100%);
+    background: radial-gradient(ellipse at center, rgba(124,49,34,0.18) 0%, rgba(28,16,7,0.9) 100%);
   }
-  .about-frame::before, .about-frame::after {
+  .about-frame::before {
     content: '';
     position: absolute;
-    border: 1px solid rgba(196,148,58,0.15);
+    inset: 12px;
+    border: 1px solid rgba(196,148,58,0.1);
   }
-  .about-frame::before { inset: 10px; }
-  .about-frame::after { inset: 20px; }
-  .about-frame-icon {
-    font-size: 7rem;
-    filter: sepia(1) hue-rotate(-10deg) brightness(0.6);
-    z-index: 1;
-  }
+  .about-frame-icon { font-size: 6rem; filter: sepia(1) brightness(0.55); z-index: 1; }
   .about-corner {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 18px; height: 18px;
     border-color: var(--gold);
     border-style: solid;
-    opacity: 0.7;
+    opacity: 0.6;
   }
   .about-corner.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
   .about-corner.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
   .about-corner.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
   .about-corner.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
-  .about-badge {
+
+  /* editorial tag replacing badge */
+  .about-tag {
     position: absolute;
-    bottom: -20px;
-    right: -20px;
-    width: 100px;
-    height: 100px;
+    bottom: -16px;
+    right: -16px;
     background: var(--rust);
-    border: 2px solid var(--gold);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    border: 1px solid rgba(196,148,58,0.5);
+    padding: 0.75rem 1.1rem;
     z-index: 2;
+    text-align: center;
   }
-  .about-badge strong {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1.5rem;
+  .about-tag strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.9rem;
     color: var(--gold2);
-    line-height: 1;
+    line-height: 1.3;
   }
-  .about-badge span {
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
+  .about-tag span {
+    display: block;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(245,237,224,0.7);
-    margin-top: 2px;
+    color: rgba(245,237,224,0.5);
+    margin-top: 3px;
   }
 
   /* ── COLLECTIONS ── */
   .collections { background: var(--dark); }
-  .collections-header { text-align: center; margin-bottom: 4rem; }
+  .collections-header { text-align: center; margin-bottom: 3.5rem; }
+  .collections-header p {
+    max-width: 480px;
+    margin: 0 auto;
+    color: rgba(245,237,224,0.45);
+    font-size: 0.95rem;
+    font-style: italic;
+  }
+
   .collection-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5px;
-    background: rgba(196,148,58,0.15);
-    border: 1px solid rgba(196,148,58,0.15);
+    background: rgba(196,148,58,0.12);
+    border: 1px solid rgba(196,148,58,0.12);
   }
   .collection-card {
     background: var(--dark);
-    padding: 2.5rem 2rem;
+    padding: 2.25rem 1.75rem;
     position: relative;
     overflow: hidden;
     transition: background 0.3s;
-    cursor: default;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
-  .collection-card:hover { background: rgba(46,26,14,0.9); }
+  .collection-card:hover { background: rgba(46,26,14,0.95); color: inherit; }
   .collection-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
-    width: 3px;
-    height: 0;
+    width: 2px; height: 0;
     background: var(--gold);
     transition: height 0.4s ease;
   }
   .collection-card:hover::before { height: 100%; }
   .card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1.25rem;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
     display: block;
     line-height: 1;
-    filter: sepia(0.5) hue-rotate(-15deg);
+    filter: sepia(0.4) hue-rotate(-15deg);
   }
   .card-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--paper);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
   }
   .card-desc {
-    font-size: 0.95rem;
-    color: rgba(245,237,224,0.6);
+    font-size: 0.9rem;
+    color: rgba(245,237,224,0.52);
     line-height: 1.75;
   }
-  .card-accent {
-    margin-top: 1.25rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
+  .card-cta {
+    margin-top: 1.1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--gold);
-    opacity: 0.8;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .collection-card:hover .card-cta { opacity: 1; color: var(--gold2); }
+
+  /* Browse all button area */
+  .browse-all {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  .browse-all p {
+    margin-top: 0.9rem;
+    color: rgba(245,237,224,0.3);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 
-  /* ── RESTORATION BANNER ── */
+  /* ── EDITORIAL STRIP ── */
+  .editorial-strip {
+    background: var(--mid);
+    border-top: 1px solid rgba(196,148,58,0.1);
+    border-bottom: 1px solid rgba(196,148,58,0.1);
+    padding: 4rem 2rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .editorial-strip::before {
+    content: 'FAUST';
+    position: absolute;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18rem;
+    color: rgba(196,148,58,0.025);
+    top: -3rem;
+    left: -2rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .editorial-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .editorial-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    color: var(--paper);
+    line-height: 1.65;
+    margin-bottom: 2rem;
+  }
+  .editorial-quote em { color: var(--gold2); font-style: normal; }
+  .editorial-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .editorial-line {
+    width: 40px; height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+  .editorial-meta span {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── RESTORATION ── */
   .restoration {
-    background: linear-gradient(135deg, var(--rust) 0%, #4a1e14 100%);
+    background: linear-gradient(135deg, var(--rust) 0%, #3e1a10 100%);
     padding: 5rem 2rem;
     text-align: center;
     position: relative;
@@ -398,122 +470,74 @@
   .restoration::before {
     content: '✦';
     position: absolute;
-    font-size: 40rem;
-    color: rgba(255,255,255,0.03);
-    top: -10rem;
-    left: -10rem;
+    font-size: 36rem;
+    color: rgba(255,255,255,0.025);
+    top: -8rem; left: -8rem;
     line-height: 1;
+    pointer-events: none;
   }
-  .restoration-inner { max-width: 700px; margin: 0 auto; }
+  .restoration-inner { max-width: 660px; margin: 0 auto; position: relative; z-index: 1; }
   .restoration h2 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-size: clamp(1.7rem, 3vw, 2.6rem);
     font-weight: 600;
     color: var(--paper);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
   }
   .restoration h2 em { font-style: italic; color: var(--gold2); }
   .restoration p {
-    font-size: 1.05rem;
-    color: rgba(245,237,224,0.75);
-    margin-bottom: 2.5rem;
+    font-size: 1rem;
+    color: rgba(245,237,224,0.7);
+    margin-bottom: 2.25rem;
     line-height: 1.85;
   }
 
   /* ── REVIEWS ── */
   .reviews { background: var(--mid); }
   .reviews-header { text-align: center; margin-bottom: 3.5rem; }
-  .stars {
-    font-size: 1.1rem;
-    color: var(--gold);
-    letter-spacing: 0.15em;
-    margin-bottom: 0.75rem;
-    display: block;
-  }
+  .stars { font-size: 1rem; color: var(--gold); letter-spacing: 0.2em; display: block; margin-bottom: 0.5rem; }
+
   .review-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
   .review-card {
-    background: rgba(15,9,4,0.5);
-    border: 1px solid rgba(196,148,58,0.15);
-    padding: 2rem;
+    background: rgba(15,9,4,0.55);
+    border: 1px solid rgba(196,148,58,0.12);
+    padding: 1.75rem;
     position: relative;
   }
   .review-card::before {
     content: '"';
     position: absolute;
-    top: -0.5rem;
-    left: 1.5rem;
+    top: -0.4rem; left: 1.25rem;
     font-family: 'Playfair Display', serif;
-    font-size: 5rem;
+    font-size: 4.5rem;
     color: var(--gold);
-    opacity: 0.25;
+    opacity: 0.18;
     line-height: 1;
   }
   .review-text {
     font-style: italic;
-    color: rgba(245,237,224,0.8);
+    color: rgba(245,237,224,0.75);
     line-height: 1.8;
     margin-bottom: 1.25rem;
-    font-size: 1rem;
+    font-size: 0.97rem;
   }
-  .review-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
+  .review-meta { display: flex; align-items: center; gap: 0.65rem; }
   .review-avatar {
-    width: 36px;
-    height: 36px;
+    width: 34px; height: 34px;
     border-radius: 50%;
     background: var(--rust);
-    border: 1px solid var(--gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--gold2);
-    flex-shrink: 0;
+    border: 1px solid rgba(196,148,58,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 600;
+    color: var(--gold2); flex-shrink: 0;
   }
-  .review-name {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--paper);
-  }
-  .review-source {
-    font-size: 0.78rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-  .review-stars { color: var(--gold); font-size: 0.8rem; }
-
-  /* ── PRICE RANGE ── */
-  .price-note {
-    margin-top: 3rem;
-    text-align: center;
-    padding: 2rem;
-    border: 1px solid rgba(196,148,58,0.2);
-    background: rgba(196,148,58,0.04);
-  }
-  .price-note p {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.2rem;
-    color: var(--gold2);
-  }
-  .price-note span {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-family: 'EB Garamond', serif;
-    font-style: normal;
-  }
+  .review-name { font-size: 0.88rem; font-weight: 500; color: var(--paper); }
+  .review-stars { color: var(--gold); font-size: 0.75rem; }
+  .review-source { font-size: 0.72rem; color: var(--muted); }
 
   /* ── VISIT ── */
   .visit { background: var(--dark); }
@@ -523,70 +547,49 @@
     gap: 5rem;
     align-items: start;
   }
-  .visit-info { }
   .info-block {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(196,148,58,0.12);
+    margin-bottom: 2.25rem;
+    padding-bottom: 2.25rem;
+    border-bottom: 1px solid rgba(196,148,58,0.1);
   }
-  .info-block:last-child { border-bottom: none; }
+  .info-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .info-label {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
     display: block;
   }
   .info-content {
-    color: rgba(245,237,224,0.8);
-    font-size: 1.05rem;
+    color: rgba(245,237,224,0.75);
+    font-size: 1rem;
     line-height: 1.9;
   }
   .info-content strong { color: var(--paper); }
-
-  .map-box {
-    border: 1px solid rgba(196,148,58,0.25);
-    overflow: hidden;
-    position: relative;
-  }
+  .map-box { border: 1px solid rgba(196,148,58,0.2); overflow: hidden; position: relative; }
   .map-box iframe {
-    width: 100%;
-    height: 420px;
-    display: block;
-    filter: sepia(0.4) hue-rotate(-10deg) brightness(0.85) contrast(1.1);
-    border: none;
+    width: 100%; height: 400px; display: block; border: none;
+    filter: sepia(0.4) hue-rotate(-10deg) brightness(0.82) contrast(1.1);
   }
-  .map-overlay {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background: rgba(15,9,4,0.9);
-    border: 1px solid rgba(196,148,58,0.35);
-    padding: 0.75rem 1.25rem;
+  .map-label {
+    position: absolute; top: 1rem; left: 1rem;
+    background: rgba(10,6,2,0.92);
+    border: 1px solid rgba(196,148,58,0.3);
+    padding: 0.6rem 1rem;
     z-index: 1;
   }
-  .map-overlay p {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    color: var(--gold2);
-  }
-  .map-overlay span {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-top: 0.2rem;
-    font-family: 'EB Garamond', serif;
-  }
+  .map-label p { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--gold2); margin: 0; }
+  .map-label span { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
   .directions-link {
     display: inline-block;
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
+    margin-top: 0.85rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--gold);
     text-decoration: none;
-    border-bottom: 1px solid rgba(196,148,58,0.35);
+    border-bottom: 1px solid rgba(196,148,58,0.3);
     padding-bottom: 2px;
     transition: color 0.2s, border-color 0.2s;
   }
@@ -594,108 +597,106 @@
 
   /* ── FOOTER ── */
   footer {
-    background: #0a0602;
+    background: #070402;
     padding: 3rem 2rem 2rem;
     text-align: center;
-    border-top: 1px solid rgba(196,148,58,0.15);
+    border-top: 1px solid rgba(196,148,58,0.12);
   }
   .footer-logo {
     font-family: 'Cinzel Decorative', serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--gold);
     letter-spacing: 0.06em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
   }
-  .footer-tagline {
-    font-style: italic;
-    color: var(--muted);
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
-  }
+  .footer-tagline { font-style: italic; color: var(--muted); font-size: 0.9rem; margin-bottom: 1.75rem; }
   .footer-links {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.75rem;
     flex-wrap: wrap;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
   }
   .footer-links a {
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
     text-decoration: none;
     transition: color 0.2s;
   }
   .footer-links a:hover { color: var(--gold); }
-  .footer-copy {
-    font-size: 0.8rem;
-    color: rgba(122,98,72,0.5);
-    letter-spacing: 0.06em;
-  }
+  .footer-copy { font-size: 0.72rem; color: rgba(122,98,72,0.38); letter-spacing: 0.08em; }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50%       { opacity: 1;   transform: scaleY(1.15); }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 1.25rem 1.5rem; }
-    .nav-links { gap: 1.25rem; }
-    .about-grid, .visit-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .about-visual { margin-top: 1rem; }
-    .review-grid { grid-template-columns: 1fr; }
-    .collection-grid { grid-template-columns: 1fr 1fr; }
-    .about-frame { width: 260px; height: 320px; }
-  }
-  @media (max-width: 600px) {
-    nav { padding: 1rem; }
-    .nav-links { display: none; }
-    .collection-grid { grid-template-columns: 1fr; }
-    .section-inner { padding: 4rem 1.25rem; }
+    0%, 100% { opacity: 0.25; }
+    50%       { opacity: 0.9; }
   }
 
   /* ── SCROLL REVEAL ── */
   .reveal {
     opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(28px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .home-nav { padding: 1.1rem 1.5rem; }
+    .about-grid, .visit-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-visual { margin-top: 0.5rem; }
+    .review-grid { grid-template-columns: 1fr; }
+    .collection-grid { grid-template-columns: 1fr 1fr; }
+    .about-frame { width: 260px; height: 340px; }
+  }
+  @media (max-width: 600px) {
+    .home-nav { padding: 1rem; }
+    .nav-links .hide-sm { display: none; }
+    .collection-grid { grid-template-columns: 1fr; }
+    .section-inner { padding: 4rem 1.25rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
+<!-- ── NAV ── -->
+<nav class="home-nav" id="homeNav">
   <a href="{% url 'home' %}" class="nav-logo">Faust's Attic</a>
   <ul class="nav-links">
-    <li><a href="#about">Our Story</a></li>
-    <li><a href="#collections">Collections</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#visit">Visit Us</a></li>
+    <li class="hide-sm"><a href="#about">Our Story</a></li>
+    <li class="hide-sm"><span class="nav-sep">·</span></li>
+    <li class="hide-sm"><a href="#collections">Collections</a></li>
+    <li class="hide-sm"><span class="nav-sep">·</span></li>
+    <li class="hide-sm"><a href="#visit">Visit</a></li>
+    <li class="hide-sm"><span class="nav-sep">·</span></li>
+    <li><a href="{% url 'catalog' %}">Catalogue</a></li>
+    <li><span class="nav-sep">·</span></li>
+    {% if user.is_authenticated %}
+      <li><a href="{% url 'cart_view' %}">🛒 Cart</a></li>
+      <li><span class="nav-sep">·</span></li>
+      <li class="nav-user-link"><a href="{% url 'logout' %}">{{ user.username }} ↩</a></li>
+    {% else %}
+      <li class="nav-pill-link"><a href="{% url 'login' %}">Sign In</a></li>
+    {% endif %}
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
-  <div class="hero-ornament">✦ &nbsp; Larnaca, Cyprus &nbsp; ✦</div>
+  <div class="hero-location">✦ &nbsp; Larnaca, Cyprus &nbsp; ✦</div>
   <h1>Faust's<br><span>Attic</span></h1>
   <p class="hero-sub">Antique &amp; Vintage Treasures</p>
-  <p class="hero-tagline">Step through our doors and travel through time. A magical family-run treasure trove where every piece tells a story from across the world.</p>
+  <p class="hero-tagline">Curation as fashion language. A space where taste becomes the narrative and every object feels ready for its own page.</p>
   <div class="hero-cta">
     <a href="{% url 'catalog' %}" class="btn btn-primary">Explore Collections</a>
-    <a href="#visit" class="btn btn-ghost">Find Us</a>
+    <a href="#about" class="btn btn-ghost">Our Story</a>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
@@ -705,20 +706,22 @@
 
 <div class="divider">✦ &nbsp; ✦ &nbsp; ✦</div>
 
-<!-- ABOUT -->
+<!-- ── ABOUT ── -->
 <section class="about" id="about">
   <div class="section-inner">
     <div class="about-grid">
+
       <div class="about-text reveal">
         <span class="section-label">Our Story</span>
-        <h2 class="section-title">A Family Passion,<br><em>A Living Museum</em></h2>
-        <p>Nestled in Larnaca with a breathtaking view, Faust's Attic is more than a shop — it is an experience. Run by a warm and passionate family, every corner of our space feels like a carefully curated chapter of history.</p>
-        <p>From the moment you step inside, you are surrounded by extraordinary pieces gathered from across countries and cultures — antique furniture, fine jewellery, rare artwork, vintage clothing, and countless collectibles. Browsing our collection takes hours, and that is the whole point.</p>
-        <div class="about-highlight">
-          <p>"It is one of the best and biggest antique shops in Cyprus. A time travel experience with timeless treasures."</p>
+        <h2 class="section-title">Dark Curated Vintage.<br><em>Quiet Luxury.</em></h2>
+        <p>Faust's Attic reframes vintage in Cyprus with an elevated, almost editorial sense of taste — moody European chic arranged with instinctive precision.</p>
+        <p>Each piece reads like a styled moment: intentional, textural, quietly dramatic. From antique furniture and fine jewellery to rare artwork and vintage clothing, every corner feels like a carefully curated chapter of history.</p>
+        <div class="about-pull">
+          <p>"This is curation as fashion language — a space where taste becomes the narrative and every object feels ready for its own page."</p>
         </div>
-        <p>We are deeply proud of our professional restoration services — whatever you can imagine, we can bring back to its former glory. Our knowledgeable owners are always on hand with expert advice and a genuine love for their craft.</p>
+        <p>Our professional restoration services are second to none — whatever you can imagine, we can bring back to its former glory. The owners are always on hand with expert advice and a genuine love for their craft.</p>
       </div>
+
       <div class="about-visual reveal">
         <div class="about-frame">
           <div class="about-corner tl"></div>
@@ -726,68 +729,100 @@
           <div class="about-corner bl"></div>
           <div class="about-corner br"></div>
           <div class="about-frame-icon">🏺</div>
-          <div class="about-badge">
-            <strong>No.1</strong>
-            <span>in Larnaca</span>
+          <div class="about-tag">
+            <strong>Quietly<br>Dramatic</strong>
+            <span>Larnaca · Cyprus</span>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <div class="divider">✦ &nbsp; ✦ &nbsp; ✦</div>
 
-<!-- COLLECTIONS -->
+<!-- ── EDITORIAL STRIP ── -->
+<div class="editorial-strip reveal">
+  <div class="editorial-inner">
+    <p class="editorial-quote">
+      "A spread of dark curated vintage, moody European chic and <em>quiet luxury</em> arranged with instinctive precision — where every object feels intentional, textural, quietly dramatic."
+    </p>
+    <div class="editorial-meta">
+      <div class="editorial-line"></div>
+      <span>Faust's Attic · Est. Larnaca</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── COLLECTIONS ── -->
 <section class="collections" id="collections">
   <div class="section-inner">
     <div class="collections-header reveal">
       <span class="section-label">What Awaits You</span>
       <h2 class="section-title">Our <em>Collections</em></h2>
-      <p style="max-width:520px; margin: 0 auto; color: rgba(245,237,224,0.6); font-size:1rem;">Every visit reveals something new. Prices range from €1 to rare museum-quality antiques — there truly is something for every collector.</p>
+      <p>Every visit reveals something new — from €1 curiosities to considered statement pieces. Click any category to begin.</p>
     </div>
+
     <div class="collection-grid reveal">
-      <div class="collection-card">
+
+      <a href="{% url 'catalog' %}?category=Мебель" class="collection-card">
         <span class="card-icon">🪑</span>
         <div class="card-title">Antique Furniture</div>
-        <p class="card-desc">Exceptional pieces from across the centuries — armchairs, bureaux, display cabinets, and tables, each with its own provenance and character.</p>
-        <p class="card-accent">✦ From across Europe &amp; the East</p>
-      </div>
-      <div class="collection-card">
+        <p class="card-desc">Armchairs, bureaux, cabinets and tables — each with its own provenance and character, sourced from across Europe and the East.</p>
+        <p class="card-cta">Browse Furniture →</p>
+      </a>
+
+      <a href="{% url 'catalog' %}?category=Ювелирные+украшения" class="collection-card">
         <span class="card-icon">💎</span>
         <div class="card-title">Vintage Jewellery</div>
-        <p class="card-desc">A sparkling trove of rings, brooches, pendants, and necklaces spanning Art Deco, Victorian, and mid-century styles. Unique pieces you will wear every day.</p>
-        <p class="card-accent">✦ Must-visit for jewellery lovers</p>
-      </div>
-      <div class="collection-card">
+        <p class="card-desc">Rings, brooches, pendants spanning Art Deco, Victorian and mid-century. Unique pieces with a story you will wear every day.</p>
+        <p class="card-cta">Browse Jewellery →</p>
+      </a>
+
+      <a href="{% url 'catalog' %}?category=Живопись" class="collection-card">
         <span class="card-icon">🖼️</span>
         <div class="card-title">Art &amp; Paintings</div>
-        <p class="card-desc">Our walls are lined with antique pictures and artwork — almost like a gallery, except everything is for sale. Old masters to folk art and everything between.</p>
-        <p class="card-accent">✦ An exhibition you can take home</p>
-      </div>
-      <div class="collection-card">
+        <p class="card-desc">Our walls read like a gallery — except everything is for sale. Old masters to folk art, framed and ready to come home with you.</p>
+        <p class="card-cta">Browse Art →</p>
+      </a>
+
+      <a href="{% url 'catalog' %}?category=Одежда" class="collection-card">
         <span class="card-icon">👗</span>
         <div class="card-title">Vintage Clothing</div>
-        <p class="card-desc">Carefully curated vintage garments and accessories for those who appreciate timeless style. From delicate lace to bold mid-century pieces.</p>
-        <p class="card-accent">✦ Wearable history</p>
-      </div>
-      <div class="collection-card">
+        <p class="card-desc">Wearable history. Carefully curated garments for those who appreciate timeless style — from delicate lace to bold mid-century cuts.</p>
+        <p class="card-cta">Browse Clothing →</p>
+      </a>
+
+      <a href="{% url 'catalog' %}?category=Игрушки" class="collection-card">
         <span class="card-icon">🧸</span>
         <div class="card-title">Toys &amp; Collectibles</div>
-        <p class="card-desc">Beloved vintage teddies, ceramic figurines, tin toys, and rare collectibles. Perfect for dedicated collectors and those seeking unique gifts.</p>
-        <p class="card-accent">✦ Treasures from childhood</p>
-      </div>
-      <div class="collection-card">
+        <p class="card-desc">Vintage teddies, ceramic figurines, tin toys and rare collectibles. Perfect for serious collectors and those seeking singular gifts.</p>
+        <p class="card-cta">Browse Collectibles →</p>
+      </a>
+
+      <a href="{% url 'catalog' %}" class="collection-card">
         <span class="card-icon">🏛️</span>
         <div class="card-title">Home &amp; Décor</div>
-        <p class="card-desc">Lamps, mirrors, clocks, silverware, ceramics, glassware — beautiful objects to add history and soul to any space, for any budget.</p>
-        <p class="card-accent">✦ From €1 upward</p>
-      </div>
+        <p class="card-desc">Lamps, mirrors, clocks, silverware, ceramics — objects to add soul to any space. Something for every budget, from €1 upward.</p>
+        <p class="card-cta">Browse All →</p>
+      </a>
+
     </div>
+
+    <div class="browse-all reveal">
+      <a href="{% url 'catalog' %}" class="btn btn-primary" style="font-size:0.95rem; padding:0.9rem 2.75rem; letter-spacing:0.16em;">
+        Browse Full Catalogue
+      </a>
+      {% if items_count %}
+      <p>{{ items_count }} piece{{ items_count|pluralize }} available now</p>
+      {% endif %}
+    </div>
+
   </div>
 </section>
 
-<!-- RESTORATION BANNER -->
+<!-- ── RESTORATION ── -->
 <div class="restoration reveal">
   <div class="restoration-inner">
     <span class="section-label" style="color:var(--gold2);">Expert Craftsmanship</span>
@@ -797,18 +832,19 @@
   </div>
 </div>
 
-<!-- REVIEWS -->
+<!-- ── REVIEWS ── -->
 <section class="reviews" id="reviews">
   <div class="section-inner">
     <div class="reviews-header reveal">
       <span class="section-label">Visitor Voices</span>
       <h2 class="section-title">What Our <em>Guests</em> Say</h2>
       <span class="stars">★ ★ ★ ★ ★</span>
-      <p style="color:var(--muted); font-size:0.9rem;">Rated 5 stars · Larnaca, Cyprus</p>
+      <p style="color:var(--muted); font-size:0.85rem; letter-spacing:0.08em;">Rated 5 stars · Larnaca, Cyprus</p>
     </div>
     <div class="review-grid reveal">
+
       <div class="review-card">
-        <p class="review-text">This antique shop is run by such a sweet family, and visiting feels like stepping into history. The atmosphere is magical — a treasure chest filled with unique pieces from different countries and cultures. If you're in Cyprus, do not miss it.</p>
+        <p class="review-text">Visiting feels like stepping into history. The atmosphere is magical — a treasure chest filled with unique pieces from different countries and cultures. If you're in Cyprus, do not miss it.</p>
         <div class="review-meta">
           <div class="review-avatar">AC</div>
           <div>
@@ -818,8 +854,9 @@
           </div>
         </div>
       </div>
+
       <div class="review-card">
-        <p class="review-text">One of the best and biggest antique shops in Cyprus! A genuine time travel experience. You need a few hours to see everything — and it still won't be enough. Excellent service, very professional and artistic restoration. The owners are great people.</p>
+        <p class="review-text">A genuine time travel experience. You need a few hours to see everything — and it still won't be enough. Excellent service, very professional and artistic restoration. The owners are great people.</p>
         <div class="review-meta">
           <div class="review-avatar">MK</div>
           <div>
@@ -829,8 +866,9 @@
           </div>
         </div>
       </div>
+
       <div class="review-card">
-        <p class="review-text">A wonderful place with a huge selection for any budget — from €1 up to incredible antiques. Antique pictures cover every wall, it is almost an exhibition, but one where you can actually buy the art. Superb collection and lovely hospitality.</p>
+        <p class="review-text">A wonderful place with a huge selection for any budget — from €1 up to incredible antiques. Antique pictures cover every wall, it's almost an exhibition, but one where you can actually take the art home.</p>
         <div class="review-meta">
           <div class="review-avatar">SL</div>
           <div>
@@ -840,20 +878,18 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="price-note reveal">
-      <p>"A wonderful place with a huge selection of interesting and unique items for any budget."</p>
-      <span>Items from €1 · Something for every collector</span>
+
     </div>
   </div>
 </section>
 
 <div class="divider">✦ &nbsp; ✦ &nbsp; ✦</div>
 
-<!-- VISIT -->
+<!-- ── VISIT ── -->
 <section class="visit" id="visit">
   <div class="section-inner">
     <div class="visit-grid">
+
       <div class="visit-info reveal">
         <span class="section-label">Plan Your Visit</span>
         <h2 class="section-title">Find <em>Us</em></h2>
@@ -880,16 +916,16 @@
         <div class="info-block">
           <span class="info-label">📞 Contact</span>
           <p class="info-content">
-            Please visit us in person or reach out via our social pages.<br>
-            We welcome all enquiries about our collections and restoration services.
+            Visit us in person or reach out via our social pages.<br>
+            We welcome all enquiries about collections and restoration.
           </p>
         </div>
 
         <div class="info-block">
           <span class="info-label">✦ Good to Know</span>
           <p class="info-content">
-            Allow at least <strong>2–3 hours</strong> to explore.<br>
-            We offer worldwide shipping on select pieces.<br>
+            Allow at least <strong>2–3 hours</strong> to explore properly.<br>
+            Worldwide shipping available on select pieces.<br>
             Online enquiries welcome for restoration projects.
           </p>
         </div>
@@ -897,7 +933,7 @@
 
       <div class="reveal">
         <div class="map-box">
-          <div class="map-overlay">
+          <div class="map-label">
             <p>Faust's Attic</p>
             <span>Larnaca, Cyprus</span>
           </div>
@@ -909,43 +945,48 @@
             title="Faust's Attic location map">
           </iframe>
         </div>
-        <a href="https://maps.app.goo.gl/P2bixzwZ7S1FTBhSA" target="_blank" class="directions-link" style="margin-top:1rem; display:inline-block;">Open in Google Maps →</a>
+        <a href="https://maps.app.goo.gl/P2bixzwZ7S1FTBhSA" target="_blank" class="directions-link">Open in Google Maps →</a>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer>
   <p class="footer-logo">Faust's Attic</p>
   <p class="footer-tagline">Antique &amp; Vintage Treasures · Larnaca, Cyprus</p>
   <nav class="footer-links">
     <a href="#about">Our Story</a>
-    <a href="#collections">Collections</a>
+    <a href="{% url 'catalog' %}">Catalogue</a>
     <a href="#reviews">Reviews</a>
     <a href="#visit">Visit Us</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'my_reservations' %}">My Bookings</a>
+    {% else %}
+      <a href="{% url 'login' %}">Sign In</a>
+    {% endif %}
   </nav>
   <p class="footer-copy">✦ &nbsp; Where every piece has a past &nbsp; ✦</p>
 </footer>
 
 <script>
-// Sticky nav
-const nav = document.getElementById('nav');
+// Sticky nav shadow
+const nav = document.getElementById('homeNav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
-});
+}, { passive: true });
 
 // Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      setTimeout(() => entry.target.classList.add('visible'), i * 70);
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.08 });
-reveals.forEach(el => observer.observe(el));
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
