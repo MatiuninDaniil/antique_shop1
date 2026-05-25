@@ -6,32 +6,40 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ── БЕЗОПАСНОСТЬ ──────────────────────────────────────
-# ── БЕЗОПАСНОСТЬ ──────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-local-dev-key-change-in-production')
 DEBUG      = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,web-production-40c55.up.railway.app,*.up.railway.app', cast=Csv())
-# ── ДОБАВЬТЕ ЭТИ СТРОКИ ────────────────────────────────
-# CSRF и CORS настройки для Railway
+
+# ── CSRF НАСТРОЙКИ ДЛЯ RAILWAY ────────────────────────
 CSRF_TRUSTED_ORIGINS = [
     'https://web-production-40c55.up.railway.app',
-    'https://*.up.railway.app',  # все поддомены Railway
+    'https://*.up.railway.app',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
 ]
 
-# Для работы с прокси (Railway использует reverse proxy)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
-
-# Куки для HTTPS (важно для Railway)
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 
+# ── ПРИЛОЖЕНИЯ (ВОССТАНОВЛЕНО!) ────────────────────────
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'catalog',
+    'accounts',
+    'dashboard',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # ← для статики
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
